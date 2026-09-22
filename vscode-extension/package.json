@@ -1,0 +1,87 @@
+{
+  "name": "codelens-vscode",
+  "displayName": "CodeLens",
+  "description": "CodeLens automatic, read-only VS Code assistant with idle code analysis.",
+  "version": "0.4.0",
+  "publisher": "codelens",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codelens.open",
+        "title": "CodeLens: Open Assistant"
+      },
+      {
+        "command": "codelens.explainCode",
+        "title": "CodeLens: Explain Code"
+      },
+      {
+        "command": "codelens.betterSolution",
+        "title": "CodeLens: Suggest Better Solution"
+      },
+      {
+        "command": "codelens.security",
+        "title": "CodeLens: Security Analysis"
+      },
+      {
+        "command": "codelens.performance",
+        "title": "CodeLens: Performance Analysis"
+      },
+      {
+        "command": "codelens.tests",
+        "title": "CodeLens: Generate Tests"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorTextFocus",
+          "command": "codelens.explainCode",
+          "group": "codelens@2"
+        },
+        {
+          "when": "editorTextFocus",
+          "command": "codelens.betterSolution",
+          "group": "codelens@3"
+        },
+        {
+          "when": "editorTextFocus",
+          "command": "codelens.security",
+          "group": "codelens@4"
+        },
+        {
+          "when": "editorTextFocus",
+          "command": "codelens.performance",
+          "group": "codelens@5"
+        },
+        {
+          "when": "editorTextFocus",
+          "command": "codelens.tests",
+          "group": "codelens@6"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CodeLens",
+      "properties": {}
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./ --types node,vscode --skipLibCheck",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.2"
+  }
+}

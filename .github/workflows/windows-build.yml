@@ -1,0 +1,32 @@
+name: Windows build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable-x86_64-pc-windows-msvc
+      - name: Install dependencies
+        run: npm ci
+      - name: Build frontend
+        run: npm run build
+      - name: Build Tauri
+        run: npm run tauri build
+      - name: Upload Windows installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: CodeLens-Windows-installer
+          path: src-tauri/target/release/bundle/**

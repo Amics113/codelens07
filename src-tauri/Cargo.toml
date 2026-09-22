@@ -1,0 +1,29 @@
+[package]
+name = "codelens"
+version = "0.8.3"
+description = "CodeLens - privacy-first Windows coding assistant"
+authors = ["CodeLens"]
+edition = "2021"
+
+[lib]
+name = "codelens_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+tauri = { version = "2.11.5", features = [] }
+tauri-plugin-opener = "2.5.4"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+serde_repr = "0.1.21"
+regex = "1.13.1"
+uuid = { version = "1.26.0", features = ["v4"] }
+keyring = { version = "3.6.3", features = ["windows-native"] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+url = "2"
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Pipes", "Win32_Storage_FileSystem"] }
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]
